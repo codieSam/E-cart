@@ -1,5 +1,6 @@
 import React from "react";
 import { useAppContext } from "../context/AppContext";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const { setshowUserLogin, setUser } = useAppContext();
@@ -15,6 +16,7 @@ const Login = () => {
       name: password,
     });
     setshowUserLogin(false);
+    toast.success("Logged in successfuly !");
   };
 
   return (

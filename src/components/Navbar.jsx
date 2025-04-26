@@ -2,6 +2,7 @@ import React from "react";
 import { Navigate, NavLink } from "react-router-dom";
 import { assets } from "../assets/assets";
 import { useAppContext } from "../context/AppContext";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
@@ -11,6 +12,7 @@ const Navbar = () => {
   const logOut = async () => {
     setUser(null);
     navigate("/");
+    toast.success("Logged out successfully !");
   };
 
   return (
