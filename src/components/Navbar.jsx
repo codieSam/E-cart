@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Navigate, NavLink } from "react-router-dom";
 import { assets } from "../assets/assets";
 import { useAppContext } from "../context/AppContext";
@@ -6,14 +6,27 @@ import toast from "react-hot-toast";
 
 const Navbar = () => {
   const [open, setOpen] = React.useState(false);
-  const { user, setUser, showUserLogin, setshowUserLogin, navigate } =
-    useAppContext();
+  const {
+    user,
+    setUser,
+    showUserLogin,
+    setshowUserLogin,
+    navigate,
+    setSearchQuery,
+    searchQuery,
+  } = useAppContext();
 
   const logOut = async () => {
     setUser(null);
     navigate("/");
     toast.success("Logged out successfully !");
   };
+
+  useEffect(() => {
+    if (searchQuery.length > 0) {
+      navigate("/products");
+    }
+  }, [searchQuery]);
 
   return (
     <div>
@@ -33,6 +46,7 @@ const Navbar = () => {
               className="py-1.5 w-full bg-transparent outline-none placeholder-gray-500"
               type="text"
               placeholder="Search products"
+              onChange={(e) => setSearchQuery(e.target.value)}
             />
             <img src={assets.search_icon} alt="search" className="w-4 h-4" />
           </div>
